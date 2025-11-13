@@ -31,7 +31,6 @@
                 window.dataLayer = window.dataLayer || [];
                 window.dataLayer.push({
                     'event': 'site-navigated',
-                    'page_path': window.location.pathname + window.location.search
                 });
             });
         });
