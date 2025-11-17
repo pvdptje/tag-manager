@@ -2,6 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+<script>
+    window.wire_navigated = {{ request()->hasHeader('X-Livewire-Navigate') ? 'true' : 'false' }};
+</script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,21 +27,6 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-PZKCGLVD');
     </script>
-    <!-- End Google Tag Manager -->
-    {{-- <script>
-        document.addEventListener('livewire:navigating', () => {
-            if (window.Intercom) {
-                window.Intercom('shutdown');
-            }
-        });
-        document.addEventListener('livewire:navigated', () => {
-            if (window.Intercom) {
-                window.Intercom('boot', {
-                    app_id: 'inzkj8rb',
-                });
-            }
-        });
-    </script> --}}
     <script>
         const APP_ID = 'inzkj8rb';
         (function() {
@@ -90,7 +79,6 @@
 <body>
     {{ $slot }}
     <div id="livewire-preserve-marker" style="display: none;" aria-hidden="true"></div>
-
 </body>
 
 </html>
