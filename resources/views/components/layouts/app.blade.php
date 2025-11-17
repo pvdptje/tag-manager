@@ -21,33 +21,75 @@
             j.src =
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5QWCNDH6');
+        })(window, document, 'script', 'dataLayer', 'GTM-PZKCGLVD');
     </script>
     <!-- End Google Tag Manager -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.addEventListener('livewire:navigated', () => {
-                console.log('Sending page view.');
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                    'event': 'site-navigated',
+    {{-- <script>
+        document.addEventListener('livewire:navigating', () => {
+            if (window.Intercom) {
+                window.Intercom('shutdown');
+            }
+        });
+        document.addEventListener('livewire:navigated', () => {
+            if (window.Intercom) {
+                window.Intercom('boot', {
+                    app_id: 'inzkj8rb',
                 });
-            });
+            }
+        });
+    </script> --}}
+    <script>
+        const APP_ID = 'inzkj8rb';
+        (function() {
+            var w = window;
+            var ic = w.Intercom;
+            if (typeof ic === "function") {
+                ic('update', w.intercomSettings);
+            } else {
+                var d = document;
+                var i = function() {
+                    i.c(arguments);
+                };
+                i.q = [];
+                i.c = function(args) {
+                    i.q.push(args);
+                };
+                w.Intercom = i;
+                var l = function() {
+                    var s = d.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = 'https://widget.intercom.io/widget/' + APP_ID;
+                    var x = d.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                };
+                window.l = l;
+                if (document.readyState === 'complete') {
+                    l();
+                } else if (w.attachEvent) {
+                    w.attachEvent('onload', l);
+                } else {
+                    w.addEventListener('load', l, false);
+                }
+            }
+        })();
+    </script>
+    <script>
+        window.intercomSettings = {
+            app_id: "inzkj8rb",
+            api_base: "https://api-iam.eu.intercom.io"
+        };
+        window.Intercom('boot', {
+            app_id: 'inzkj8rb',
         });
     </script>
+ @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QWCNDH6" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     {{ $slot }}
-
-
-    <img src="/images/trigger.png" />
-    <br />
-    <img src="/images/tag.png" />
+    <div id="livewire-preserve-marker" style="display: none;" aria-hidden="true"></div>
 
 </body>
 
